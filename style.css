@@ -1,0 +1,52 @@
+body{
+    display: flex;
+    justify-content: center;
+    margin-top: 33vh;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.calculator{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    width: 410px;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.row{
+    display: flex;
+    justify-content: space-around;
+    width: 395px;
+    gap: 5px;
+}
+
+#display{
+    background-color: grey;
+    width: 370px;
+    height: 70px;
+}
+
+.key{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    flex: 1;
+    background-color: rgb(6, 76, 87);
+    border-radius: 1cap;
+}
+
+#zero{
+    flex: 2;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.orange{
+    background-color: orange;
+}
