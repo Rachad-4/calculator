@@ -24,29 +24,46 @@ body{
 }
 
 #display{
-    background-color: grey;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    background-color: rgb(205, 202, 202);
     width: 370px;
     height: 70px;
+}
+
+#rd{
+    display: flex;
+    justify-content: center;
 }
 
 .key{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 45px;
+    height: 55px;
     flex: 1;
-    background-color: rgb(6, 76, 87);
     border-radius: 1cap;
+    font-weight: bold;
+    font-size: x-large;
 }
 
 #zero{
     flex: 2;
 }
 
+.zrow{
+    gap: 7.5px
+}
+
 .blue{
-    background-color: blue;
+    background-color: rgb(36, 112, 243);
 }
 
 .orange{
-    background-color: orange;
+    background-color: rgb(255, 179, 0);
+}
+
+.green{
+    background-color: rgb(10, 136, 155);
 }
