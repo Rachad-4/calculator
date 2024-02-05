@@ -1,73 +1,128 @@
 const displayScreen = document.querySelector(`#display`);
 
 let display = "";
-let sum = 0;
+let prev;
+let cur = "";
+let operator = ""; 
+let firstEntry = true;
 
 for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
     document.querySelectorAll(`.key`)[i].addEventListener(`click`,function () {
         makeSound(); 
-
         switch(this.innerHTML){
             case "-":
-                subtract();
-                break;
+                if (firstEntry){
+                    prev = cur; 
+                    cur = "";
+                    operator = "-";
+                    firstEntry = false; 
+                }else {
+                    cur = operation(prev,operator,cur);
+                    operator = this.innerHTML;
+                    displayScreen.innerHTML = cur;
+                    prev = cur;
+                    cur = "";                    
+                    break;
+                }
 
             case "+":
-                add(); 
-                break;
+                if (firstEntry){
+                    prev = cur; 
+                    cur = "";
+                    operator = "-";
+                    firstEntry = false; 
+                }else {
+                    cur = operation(prev,operator,cur);
+                    operator = this.innerHTML;
+                    displayScreen.innerHTML = cur;
+                    prev = cur;
+                    cur = "";                    
+                    break;
+                }
 
             case "*":
-                multiply();
-                break;
-
+                if (firstEntry){
+                    prev = cur; 
+                    cur = "";
+                    operator = "-";
+                    firstEntry = false; 
+                }else {
+                    cur = operation(prev,operator,cur);
+                    operator = this.innerHTML;
+                    displayScreen.innerHTML = cur;
+                    prev = cur;
+                    cur = "";                    
+                    break;
+                }
+    
             case "/":
-                divide();
-                break;
-
+                if (firstEntry){
+                    prev = cur; 
+                    cur = "";
+                    operator = "-";
+                    firstEntry = false; 
+                }else {
+                    cur = operation(prev,operator,cur);
+                    operator = this.innerHTML;
+                    displayScreen.innerHTML = cur;
+                    prev = cur;
+                    cur = "";                    
+                    break;
+                }
+    
             case "AC":
                 clear();
                 break;
-
+    
             case "+/-":
-                console.log("make negative");
+                cur *= -1;
+                displayScreen.innerHTML = cur;
                 break;
-
+    
             case "%":
-                console.log("make percent");
+                cur /= 100;
+                displayScreen.innerHTML = cur;
                 break;
-
+    
             default:
-                display += this.innerHTML;
-                displayScreen.textContent = display;
-        }
+                console.log(this.innerHTML);
+                cur += this.innerHTML;
+                displayScreen.textContent = cur;
+                console.log(cur);
+        } 
     })
 }
 
+console.log(operation(1,"-",2));
+
 function clear(){
-    sum = 0;
+    cur = "";
+    prev = "";
     display = ""; 
+    operator = "";
+    firstEntry = true;
     displayScreen.textContent = display;
 }
 
-function add(){
-    sum += parseFloat(display);
-    displaySum();
+function operation(num1, operator, num2) {
+    switch(operator){
+        case "-":
+            return num1 - num2;
+
+        case "+":
+            return parseFloat(num1) + parseFloat(num2);
+
+        case "/":
+            return parseFloat(num1) / parseFloat(num2);
+            
+        case "*":
+            return parseFloat(num1) * parseFloat(num2);
+        
+         default:
+            console.log("help");   
+    }
 }
 
-function subtract(){
-    sum -= parseFloat(display);
-    displaySum();
-}
-
-function multiply(){
-    sum *= parseFloat(display);
-    displaySum();
-}
-
-function divide(){
-    sum /= parseFloat(display);
-    displaySum();
-}
 
 function makeSound(){
     var click = new Audio("./sounds/click.mp3");
