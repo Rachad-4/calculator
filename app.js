@@ -112,10 +112,12 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
                 }
 
             default:
-                console.log(this.innerHTML);
-                cur += this.innerHTML;
-                displayScreen.textContent = cur;
-                console.log(cur);
+                if (cur.length < 25){
+                    console.log(this.innerHTML);
+                    cur += this.innerHTML;
+                    displayScreen.textContent = cur;
+                    console.log(cur);
+                }      
         } 
     })
 }
