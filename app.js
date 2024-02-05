@@ -1,10 +1,12 @@
 const displayScreen = document.querySelector(`#display`);
+const soundBtn = document.querySelector("#sound");
 
 let display = "";
 let prev;
 let cur = "";
 let operator = ""; 
 let firstEntry = true;
+let btnSounds = true;
 
 for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
     document.querySelectorAll(`.key`)[i].addEventListener(`click`,function () {
@@ -93,7 +95,10 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
     })
 }
 
-console.log(operation(1,"-",2));
+soundBtn.addEventListener(`click`, ()=>{
+    btnSounds = !btnSounds;
+    console.log(btnSounds);
+})
 
 function clear(){
     cur = "";
@@ -125,8 +130,12 @@ function operation(num1, operator, num2) {
 
 
 function makeSound(){
-    var click = new Audio("./sounds/click.mp3");
-    click.play();
+    if (btnSounds){
+        var click = new Audio("./sounds/click.mp3");
+        click.play();
+    } else {
+        console.log("click");
+    }
 }
 
 function displaySum(){
