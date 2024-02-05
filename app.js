@@ -81,6 +81,13 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
                 displayScreen.innerHTML = cur;
                 break;
     
+            case "=":
+                cur = operation(prev,operator,cur);
+                displayScreen.innerHTML = cur;
+                prev = cur;
+                cur = ""; 
+                break;
+
             case "%":
                 cur /= 100;
                 displayScreen.innerHTML = cur;
@@ -97,7 +104,6 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
 
 soundBtn.addEventListener(`click`, ()=>{
     btnSounds = !btnSounds;
-    console.log(btnSounds);
 })
 
 function clear(){
