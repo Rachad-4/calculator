@@ -8,10 +8,15 @@ let operator = "";
 let firstEntry = true;
 let btnSounds = true;
 let isDecimal = false;
+let lastEntry = ""; 
 
 for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
     document.querySelectorAll(`.key`)[i].addEventListener(`click`,function () {
         makeSound(); 
+        if (lastEntry == "=" && !isNaN(this.innerHTML)){
+            clear();
+        };
+
         switch(this.innerHTML){
             case "-":
                 if (firstEntry){
@@ -19,7 +24,8 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
                     cur = "";
                     operator = "-";
                     firstEntry = false;
-                    isDecimal = false 
+                    isDecimal = false;
+                    break;
                 }else {
                     cur = operation(prev,operator,cur);
                     operator = this.innerHTML;
@@ -34,9 +40,10 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
                 if (firstEntry){
                     prev = cur; 
                     cur = "";
-                    operator = "-";
+                    operator = "+";
                     firstEntry = false; 
-                    isDecimal = false
+                    isDecimal = false;
+                    break;
                 }else {
                     cur = operation(prev,operator,cur);
                     operator = this.innerHTML;
@@ -51,9 +58,10 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
                 if (firstEntry){
                     prev = cur; 
                     cur = "";
-                    operator = "-";
+                    operator = "*";
                     firstEntry = false; 
-                    isDecimal = false
+                    isDecimal = false;
+                    break;
                 }else {
                     cur = operation(prev,operator,cur);
                     operator = this.innerHTML;
@@ -68,9 +76,10 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
                 if (firstEntry){
                     prev = cur; 
                     cur = "";
-                    operator = "-";
+                    operator = "/";
                     firstEntry = false; 
-                    isDecimal = false
+                    isDecimal = false;
+                    break;
                 }else {
                     cur = operation(prev,operator,cur);
                     operator = this.innerHTML;
@@ -92,10 +101,10 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
     
             case "=":
                 cur = operation(prev,operator,cur);
-                displayScreen.innerHTML = cur;
-                prev = cur;
-                cur = ""; 
+                displayScreen.innerHTML = cur; 
                 isDecimal = false
+                firstEntry = true; 
+                lastEntry = "=";
                 break;
 
             case "%":
@@ -137,7 +146,8 @@ document.addEventListener(`keydown`, function(event){
                     cur = "";
                     operator = "-";
                     firstEntry = false;
-                    isDecimal = false 
+                    isDecimal = false;
+                    break;
                 }else {
                     cur = operation(prev,operator,cur);
                     operator = event.key;
@@ -152,9 +162,10 @@ document.addEventListener(`keydown`, function(event){
                 if (firstEntry){
                     prev = cur; 
                     cur = "";
-                    operator = "-";
+                    operator = "+";
                     firstEntry = false; 
-                    isDecimal = false
+                    isDecimal = false;
+                    break;
                 }else {
                     cur = operation(prev,operator,cur);
                     operator = event.key;
@@ -169,9 +180,10 @@ document.addEventListener(`keydown`, function(event){
                 if (firstEntry){
                     prev = cur; 
                     cur = "";
-                    operator = "-";
+                    operator = "*";
                     firstEntry = false; 
-                    isDecimal = false
+                    isDecimal = false;
+                    break; 
                 }else {
                     cur = operation(prev,operator,cur);
                     operator = event.key
@@ -186,9 +198,10 @@ document.addEventListener(`keydown`, function(event){
                 if (firstEntry){
                     prev = cur; 
                     cur = "";
-                    operator = "-";
+                    operator = "/";
                     firstEntry = false; 
-                    isDecimal = false
+                    isDecimal = false;
+                    break;
                 }else {
                     cur = operation(prev,operator,cur);
                     operator = event.key;
@@ -210,10 +223,23 @@ document.addEventListener(`keydown`, function(event){
     
             case "=":
                 cur = operation(prev,operator,cur);
-                displayScreen.innerHTML = cur;
-                prev = cur;
-                cur = ""; 
+                displayScreen.innerHTML = cur; 
                 isDecimal = false
+                firstEntry = true; 
+                break;
+
+            case "=":
+                cur = operation(prev,operator,cur);
+                displayScreen.innerHTML = cur; 
+                isDecimal = false
+                firstEntry = true; 
+                break;
+
+            case "Enter":
+                cur = operation(prev,operator,cur);
+                displayScreen.innerHTML = cur; 
+                isDecimal = false
+                firstEntry = true; 
                 break;
 
             case "%":
@@ -249,6 +275,7 @@ function clear(){
     operator = "";
     firstEntry = true;
     isDecimal = false;
+    lastEntry = "";
     displayScreen.textContent = display;
 }
 
