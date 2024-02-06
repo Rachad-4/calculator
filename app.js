@@ -100,12 +100,17 @@ for (let i = 0; i < document.querySelectorAll(`.key`).length; i++){
                 break;
     
             case "=":
-                cur = operation(prev,operator,cur);
-                displayScreen.innerHTML = cur; 
-                isDecimal = false
-                firstEntry = true; 
-                lastEntry = "=";
-                break;
+                if (prev && cur){
+                    cur = operation(prev,operator,cur);
+                    displayScreen.innerHTML = cur; 
+                    isDecimal = false
+                    firstEntry = true; 
+                    lastEntry = "=";
+                    break;
+                } else {
+                    break;
+                }
+                
 
             case "%":
                 isDecimal = true;
@@ -292,7 +297,7 @@ function operation(num1, operator, num2) {
             
         case "*":
             return parseFloat(num1) * parseFloat(num2);
-        
+
          default:
             console.log("help");   
     }
